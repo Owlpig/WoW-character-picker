@@ -6,14 +6,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const testAPIRouter = require('./routes/testAPI');
+const raceRouter = require('./routes/races');
+const classRouter = require('./routes/classes');
+const mapRouter = require('./routes/racemap');
+const iconRouter = require('./routes/classicons')
 
 const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -22,9 +21,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
+app.use('/races', raceRouter);
+app.use('/classes', classRouter);
+app.use('/racemap', mapRouter);
+app.use('/classicons', iconRouter)
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -39,7 +41,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  next();
 });
 
 module.exports = app;

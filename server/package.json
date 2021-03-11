@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "lint": "eslint ."
+    "dev": "nodemon --exec 'npm run start && lint'",
+    "lint": "eslint --fix ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,8 +13,15 @@
     "debug": "~2.6.9",
     "eslint-config-salt": "^1.1.0",
     "express": "~4.16.1",
+    "express-react-views": "^0.11.0",
     "http-errors": "~1.6.3",
     "jade": "^0.29.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node-fetch": "^2.6.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
