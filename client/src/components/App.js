@@ -43,8 +43,7 @@ const App = () => {
 
   const renderChoice = (choice, form) => {
     if (form === 'class') {
-      const idx = parseInt(choice, 10) - 1;
-      const classChoice = raceMap[idx];
+      const classChoice = raceMap.find(wowclass => wowclass.id === parseInt(choice, 10));
       const raceOptions = classChoice.races.map(id => raceList.find(race => race.id === id));
       raceOptions.map(race => {
         const raceIcon = raceIcons.find(icon => icon.id === race.id);
