@@ -54,13 +54,33 @@ input {
   border-color: rgb(96, 99, 102) rgb(49, 47, 47) rgb(49, 47, 47) rgb(49, 47, 47);
 }
 
-.icon {
-  height: 10px;
-}
-
 .choice-list {
   margin: 30px;
   display: grid;
   grid-template-columns: auto auto ;
   grid-column-gap: 4rem;
+}
+
+.choice-heading {
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.choice-box {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.icon-container {
+  margin: 10px 5px;
+}
+
+.icon {
+  height: 1.2em;
+  padding: 2px;
+}
+
+.choice-text {
+  margin: 10px 0px;
 }

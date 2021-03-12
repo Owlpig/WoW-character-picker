@@ -10,7 +10,8 @@ const testAPIRouter = require('./routes/testAPI');
 const raceRouter = require('./routes/races');
 const classRouter = require('./routes/classes');
 const mapRouter = require('./routes/racemap');
-const iconRouter = require('./routes/classicons')
+const classIconRouter = require('./routes/classicons');
+const raceIconRouter = require('./routes/raceicons');
 
 const app = express();
 
@@ -25,7 +26,8 @@ app.use('/testAPI', testAPIRouter);
 app.use('/races', raceRouter);
 app.use('/classes', classRouter);
 app.use('/racemap', mapRouter);
-app.use('/classicons', iconRouter)
+app.use('/classicons', classIconRouter);
+app.use('/raceicons', raceIconRouter);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
