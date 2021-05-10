@@ -12,12 +12,14 @@ cd wow-character-picker
 ```
 Start server:
 ```bash
+cd server
 npm i
 npm start
 ```
 
 Start client:
 ```bash
+cd client
 yarn
 yarn start
 ```
