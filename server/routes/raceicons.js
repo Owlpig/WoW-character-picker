@@ -1,5 +1,5 @@
 const express = require('express');
-const raceicons = require('../db/raceicons.json');
+const raceicons = require('../db/races');
 
 const router = express.Router();
 

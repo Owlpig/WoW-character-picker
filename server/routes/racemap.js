@@ -1,5 +1,5 @@
 const express = require('express');
-const racemap = require('../db/racemap.json');
+const racemap = require('../db/classes');
 
 const router = express.Router();
 
