@@ -1,5 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
+const Races = require('../models/raceModel');
 
 const router = express.Router();
 const accessToken = 'USnfk6O3P9Ir1JbSvMLIQsWulLJhfmrfn0';
@@ -12,6 +13,17 @@ const fetchRaces = async () => {
 
 router.get('/', async (req, res) => {
   const races = await fetchRaces();
+  res.send(races);
+});
+
+router.put('/', async (req, res) => {
+  const races = await fetchRaces();
+  races.forEach(async r => {
+    const race = await Races.findOne({ id: r.id });
+    race.name = r.name;
+    race.save();
+  });
+
   res.send(races);
 });
 

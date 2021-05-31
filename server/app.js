@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 
 connectDB();
 
+require('./config/seed');
 const indexRouter = require('./routes/index');
 const testAPIRouter = require('./routes/testAPI');
 const raceRouter = require('./routes/races');
