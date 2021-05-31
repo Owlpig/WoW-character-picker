@@ -28,6 +28,7 @@ router.put('/', async (req, res) => {
     const { specializations } = await fetchSpecs(c.classId);
     const dbSpecs = c.specs;
     specializations.forEach(s => dbSpecs.push({ name: s.name, id: s.id }));
+    c.save();
   });
 
   res.send(dbClasses);
