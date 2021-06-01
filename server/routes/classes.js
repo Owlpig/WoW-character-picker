@@ -55,7 +55,6 @@ router.put('/armor', async (req, res) => {
     dbArmor.armor = armorType.type;
     c.save();
   });
-
   res.send(dbClasses);
 });
 
@@ -66,9 +65,10 @@ router.put('/roles', async (req, res) => {
       const specDetails = await fetchSpecDetails(s.id);
       const spec = s;
       spec.role = specDetails.role.name;
-      s.save({ suppressWarning: true });
+      await s.save({ suppressWarning: true });
     });
-    c.save();
+    c.markModified('specs');
+    await c.save();
   });
 
   res.send(dbClasses);
@@ -77,13 +77,15 @@ router.put('/roles', async (req, res) => {
 router.put('/media', async (req, res) => {
   const dbClasses = await Classes.find();
   dbClasses.forEach(async c => {
-    c.specs.forEach(async s => {
+    await c.specs.forEach(async s => {
       const specDetails = await fetchSpecMedia(s.id);
       const spec = s;
       spec.icon = specDetails.assets[0].value;
-      s.save({ suppressWarning: true });
+      console.log(spec);
+      await s.save({ suppressWarning: true });
     });
-    c.save();
+    c.markModified('specs');
+    await c.save();
   });
 
   res.send(dbClasses);
