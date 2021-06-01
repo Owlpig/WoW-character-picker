@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
   res.send(classes);
 });
 
-router.put('/', async (req, res) => {
+router.put('/specs', async (req, res) => {
   const dbClasses = await Classes.find();
   dbClasses.forEach(async c => {
     const { specializations } = await fetchSpecs(c.classId);
@@ -61,12 +61,12 @@ router.put('/armor', async (req, res) => {
 router.put('/roles', async (req, res) => {
   const dbClasses = await Classes.find();
   dbClasses.forEach(async c => {
-    c.specs.forEach(async s => {
+    await Promise.all(c.specs.map(async s => {
       const specDetails = await fetchSpecDetails(s.id);
       const spec = s;
       spec.role = specDetails.role.name;
       await s.save({ suppressWarning: true });
-    });
+    }));
     c.markModified('specs');
     await c.save();
   });
@@ -77,13 +77,12 @@ router.put('/roles', async (req, res) => {
 router.put('/media', async (req, res) => {
   const dbClasses = await Classes.find();
   dbClasses.forEach(async c => {
-    await c.specs.forEach(async s => {
+    await Promise.all(c.specs.map(async s => {
       const specDetails = await fetchSpecMedia(s.id);
       const spec = s;
       spec.icon = specDetails.assets[0].value;
-      console.log(spec);
       await s.save({ suppressWarning: true });
-    });
+    }));
     c.markModified('specs');
     await c.save();
   });
