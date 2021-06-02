@@ -9,7 +9,9 @@ const Choices = ({ choiceList }) => {
   return (
     <section className='choice-list'>
       {isChosen() && <p className='choice-heading'>Available options:</p>}
-      {choiceList.map(choice => <Choice choice={choice} key={choice.id}/>)}
+      {choiceList.map(choice => <Choice
+        choice={choice}
+        key={choice.classId ? choice.classId : choice.id}/>)}
     </section>
   );
 };

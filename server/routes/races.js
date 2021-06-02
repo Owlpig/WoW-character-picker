@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const Races = require('../models/raceModel');
 const classes = require('../db/classes');
+const dbRaces = require('../db/races');
 
 const router = express.Router();
 const accessToken = process.env.API_TOKEN;
@@ -19,7 +20,7 @@ const fetchRaceDetails = async id => {
 };
 
 router.get('/', async (req, res) => {
-  const races = await fetchRaces();
+  const races = await Races.find();
   res.send(races);
 });
 
@@ -32,6 +33,18 @@ router.put('/', async (req, res) => {
   });
 
   res.send(races);
+});
+
+router.put('/icons', async (req, res) => {
+  const races = await Races.find();
+  races.forEach(async r => {
+    const race = await dbRaces.find(i => i.id === r.id);
+    const dbRace = r;
+    dbRace.icon = race.icon;
+    r.save();
+  });
+
+  res.send(dbRaces);
 });
 
 router.put('/factions', async (req, res) => {

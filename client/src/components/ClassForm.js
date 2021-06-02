@@ -18,8 +18,8 @@ const ClassForm = ({ renderChoice, classList }) => {
       <select defaultValue="" id='classes' onChange={e => handleChange(e)}>
         <option value="" disabled hidden>None selected</option>
         {classList.map(wowclass => <option
-        key={wowclass.id}
-        value={wowclass.id}>{wowclass.name}</option>)}
+        key={wowclass.classId}
+        value={wowclass.classId}>{wowclass.name}</option>)}
       </select>
       <input type='submit' value='Submit'/>
     </form>

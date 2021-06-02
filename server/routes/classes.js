@@ -6,11 +6,11 @@ const armor = require('../db/armor');
 const router = express.Router();
 const accessToken = process.env.API_TOKEN;
 
-const fetchClasses = async () => {
-  const rawClasses = await fetch(`https://us.api.blizzard.com/data/wow/playable-class/index?namespace=static-us&locale=en_US&access_token=${accessToken}`);
-  const classData = rawClasses.json();
-  return classData;
-};
+// const fetchClasses = async () => {
+//   const rawClasses = await fetch(`https://us.api.blizzard.com/data/wow/playable-class/index?namespace=static-us&locale=en_US&access_token=${accessToken}`);
+//   const classData = rawClasses.json();
+//   return classData;
+// };
 
 const fetchSpecs = async id => {
   const rawSpecs = await fetch(`https://us.api.blizzard.com/data/wow/playable-class/${id}?namespace=static-us&locale=en_US&access_token=${accessToken}`);
@@ -31,7 +31,7 @@ const fetchSpecMedia = async id => {
 };
 
 router.get('/', async (req, res) => {
-  const classes = await fetchClasses();
+  const classes = await Classes.find();
   res.send(classes);
 });
 
